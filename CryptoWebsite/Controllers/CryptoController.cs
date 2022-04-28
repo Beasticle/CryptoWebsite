@@ -1,24 +1,30 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Text.Encodings.Web;
+using RestSharp;
 
-namespace MvcMovie.Controllers
+namespace CryptoWebsite.Controllers
 {
-    public class HelloWorldController : Controller
+    public class CryptoController : Controller
     {
-        // 
-        // GET: /HelloWorld/
-
-        public string Index()
+        public IActionResult Index()
         {
-            return "This is my default action...";
+            return View();
         }
 
-        // 
-        // GET: /HelloWorld/Welcome/ 
-
-        public string Welcome()
+        public IActionResult Welcome(string name, int numTimes = 1)
         {
-            return "This is the Welcome action method...";
+            ViewData["Message"] = "Hello " + name;
+            ViewData["NumTimes"] = numTimes;
+            return View();
+        }
+
+        public async Task<IActionResult> cryptoView()
+        {
+            var client = new RestClient("https://cryptowebapp1.azurewebsites.net");
+            var request = new RestRequest("/CryptoCoin/BTC");
+            var response = await client.GetAsync(request);
+            ViewData["coin"] = response.Content;
+            return View();
         }
     }
 }
