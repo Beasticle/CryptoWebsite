@@ -11,19 +11,22 @@ namespace CryptoWebsite.Controllers
             return View();
         }
 
-        public IActionResult Welcome(string name, int numTimes = 1)
-        {
-            ViewData["Message"] = "Hello " + name;
-            ViewData["NumTimes"] = numTimes;
-            return View();
-        }
-
-        public async Task<IActionResult> cryptoView()
+        public async Task<IActionResult> cryptoView(Models.CryptoCoin coin)
         {
             var client = new RestClient("https://cryptowebapp1.azurewebsites.net");
-            var request = new RestRequest("/CryptoCoin/BTC");
-            var response = await client.GetAsync(request);
-            ViewData["coin"] = response.Content;
+
+            if (coin.SearchName == null)
+            {
+                coin = new Models.CryptoCoin();
+                coin.SearchName = "BTC";
+            }
+
+            var request = new RestRequest($"/CryptoCoin/{coin.SearchName}");
+            var response = await client.GetAsync<Models.CoinObject>(request);
+            ViewData["name"] = response.Name;
+            ViewData["price"] = response.Price;
+            ViewData["supply"] = response.Supply;
+            ViewData["mktcap"] = response.Mktcap;
             return View();
         }
     }

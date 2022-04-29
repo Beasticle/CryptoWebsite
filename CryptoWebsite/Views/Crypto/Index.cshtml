@@ -1,8 +1,15 @@
 ﻿@{
     ViewData["Title"] = "Crypto Tracker";
 }
+@model CryptoCoin;
 
 <h2>My Crypto Tracker</h2>
 
 <p>The purpose of this site is to be a tool to look up different cryptocurriences and the details of them.</p>
 
+<form asp-controller="Crypto" asp-action="cryptoView" method="get">
+    <p>
+        Crypto currency ticket symbol: <input type="text" asp-for="SearchName" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>

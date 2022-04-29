@@ -1,7 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Cryptocurrency";
+    ViewData["Title"] = "Crypto Info";
 }
+@model CryptoCoin;
 
-<h2>Welcome</h2>
+<h2>Crypto Info</h2>
+<form asp-controller="Crypto" asp-action="cryptoView" method="get">
+    <p>
+        Crypto currency ticket symbol: <input type="text" asp-for="SearchName" />
+        <input type="submit" value="Filter" />
+    </p>
+</form>
 
-<p>@ViewData["coin"]</p>
+<ul>
+    <li>Name: @ViewData["name"]</li>
+    <li>Price: @ViewData["price"]</li>
+    <li>Active supply: @ViewData["supply"]</li>
+    <li>Market cap: @ViewData["mktcap"]</li>
+</ul>
