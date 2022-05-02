@@ -1,15 +1,63 @@
-﻿@{
+﻿@model IEnumerable<CryptoWebsite.Models.CoinObject>
+
+@{
     ViewData["Title"] = "Crypto Tracker";
 }
-@model CryptoCoin;
 
 <h2>My Crypto Tracker</h2>
 
 <p>The purpose of this site is to be a tool to look up different cryptocurriences and the details of them.</p>
 
-<form asp-controller="Crypto" asp-action="cryptoView" method="get">
+@*<form asp-controller="Crypto" asp-action="cryptoView" method="get">
     <p>
-        Crypto currency ticket symbol: <input type="text" asp-for="SearchName" />
+        
+        Crypto currency ticket symbol: <input type="text" asp-for="Name"/>
         <input type="submit" value="Filter" />
     </p>
-</form>
+</form>*@
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supply)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mktcap)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supply)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mktcap)
+            </td>
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

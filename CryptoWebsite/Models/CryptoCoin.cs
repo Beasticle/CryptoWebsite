@@ -2,6 +2,6 @@
 {
     public class CryptoCoin
     {
-        public string SearchName { get; set; }
+        public string Name { get; set; }
     }
 }
