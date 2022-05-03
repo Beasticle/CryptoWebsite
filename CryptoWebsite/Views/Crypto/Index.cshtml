@@ -17,9 +17,9 @@
 </form>*@
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-success" asp-action="Create">Search for Crypto</a>
 </p>
-<table class="table">
+<table class="table table-bordered table-striped table-dark">
     <thead>
         <tr>
             <th>
@@ -34,7 +34,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Mktcap)
             </th>
-            <th></th>
+            <th>
+                Actions
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -54,8 +56,8 @@
             </td>
             <td>
                 @*<a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |*@
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ID">Delete</a>
             </td>
         </tr>
 }
